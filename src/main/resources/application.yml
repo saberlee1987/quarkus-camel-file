@@ -1,0 +1,36 @@
+greeting:
+  message: "hello"
+
+quarkus:
+  http:
+    port: 9004
+  application:
+    name: camel-file
+  vertx:
+    queue-size: 5000
+    worker-pool-size: 5000
+    max-worker-execute-time: 30
+    resolver:
+      cache-min-time-to-live: 30
+    eventbus:
+      connect-timeout: 30
+      idle-timeout: 30
+  smallrye-openapi:
+    enable: true
+    info-version: version1.0
+    path: /services/jaxrs/v2/api-docs
+  swagger-ui:
+    enable: true
+    path: /swagger
+    theme: material
+    urls:
+      camel: ${service.api.base-path}${service.api.swagger-path}
+      jaxrs: ${quarkus.smallrye-openapi.path}
+
+
+service:
+  api:
+    base-path: /services/camel-file
+    swagger-path: /v2/api-dcos
+  log:
+    pretty-print: true
